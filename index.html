@@ -10,6 +10,9 @@
 
     <!-- stylesheet -->
      <link rel="stylesheet" href="styles/pizza-styles.css">
+
+    <!-- JavaScript -->
+    <script src="pizza.js" defer></script>
 </head>
 <body>
     <main>
@@ -27,17 +30,32 @@
             <!-- Contact Info -->
             <fieldset>
                 <legend>Contact Info</legend>
-                <label for="fname">First Name:</label>
+                <label for="fname">First Name: 
+                    <span class="err" id="err-fname">
+                        First name is required
+                    </span>
+                </label>
                 <input type="text" id="fname" name="fname">
-                <label for="lname">Last Name:</label>
+                <label for="lname">Last Name:
+                    <span class="err" id="err-lname">
+                        Last name is required
+                    </span>
+                </label>
                 <input type="text" id="lname" name="lname">
-                <label for="email">Email Address:</label>
+                <label for="email">Email Address:
+                    <span class="err" id="err-email">
+                        Email is required
+                    </span>
+                </label>
                 <input type="text" id="email" name="email">
             </fieldset> 
 
             <!-- Pickup or Delivery -->
             <fieldset>
                 <legend>Select Pickup or Delivery</legend>
+                    <span class="err" id="err-method">
+                        Please select pickup or delivery
+                    </span>
                 <label for="pickup">
                     <input type="radio" id="pickup"
                            value="pickup"
@@ -90,6 +108,9 @@
             <!-- Size -->
             <fieldset>
                 <legend>Pizza Size</legend>
+                <span class="err" id="err-size">
+                    Please select a pizza size
+                </span>
                 <select id="size" name="size">
                     <option value="none">-- Select a size --</option>
                     <option value="small">Small</option>
