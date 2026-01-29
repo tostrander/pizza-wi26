@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poppa's Pizza</title>
+
+    <!-- favicon -->
+    <link rel="icon" href="images/pizza-slice.jpg">
+
+    <!-- stylesheet -->
+     <link rel="stylesheet" href="styles/pizza-styles.css">
+
+    <!-- JavaScript -->
+    <script src="pizza.js" defer></script>
+</head>
+<body>
+    <main>
+        <header>
+            <img src="images/pizza-guy.png" alt="pizza guy">
+            <h1>Welcome to Poppa's Pizza</h1>
+            <h2>Serving GRC Students for 50 Years</h2>
+            <hr>
+            <p>Come check us out</p>
+            <a id="contact-button" href="#" role="button">Contact Us</a>
+        </header>
+
+        <form id="pizza-form" action="#" method="get">
+
+            <!-- Contact Info -->
+            <fieldset>
+                <legend>Contact Info</legend>
+                <label for="fname">First Name: 
+                    <span class="err" id="err-fname">
+                        First name is required
+                    </span>
+                </label>
+                <input type="text" id="fname" name="fname">
+                <label for="lname">Last Name:
+                    <span class="err" id="err-lname">
+                        Last name is required
+                    </span>
+                </label>
+                <input type="text" id="lname" name="lname">
+                <label for="email">Email Address:
+                    <span class="err" id="err-email">
+                        Email is required
+                    </span>
+                </label>
+                <input type="text" id="email" name="email">
+            </fieldset> 
+
+            <!-- Pickup or Delivery -->
+            <fieldset>
+                <legend>Select Pickup or Delivery</legend>
+                    <span class="err" id="err-method">
+                        Please select pickup or delivery
+                    </span>
+                <label for="pickup">
+                    <input type="radio" id="pickup"
+                           value="pickup"
+                           name="method">Pickup
+                </label>
+                <label for="delivery">
+                    <input type="radio" id="delivery"
+                           value="delivery"
+                           name="method">Delivery
+                </label>
+            </fieldset>  
+            
+            <!-- Toppings -->
+            <fieldset>
+                <legend>Select Toppings</legend>
+                <label for="pepperoni">
+                    <input type="checkbox"
+                           id="pepperoni"
+                           name="toppings[]"
+                           value="pepperoni">
+                        Pepperoni
+                    </input>
+                </label>  
+                <label for="mushrooms">
+                    <input type="checkbox"
+                           id="mushrooms"
+                           name="toppings[]"
+                           value="mushrooms">
+                        Mushrooms
+                    </input>
+                </label>
+                <label for="artichokes">
+                    <input type="checkbox"
+                           id="artichokes"
+                           name="toppings[]"
+                           value="artichokes">
+                        Artichokes
+                    </input>
+                </label>
+                <label for="tomatoes">
+                    <input type="checkbox"
+                           id="tomatoes"
+                           name="toppings[]"
+                           value="tomatoes">
+                        Tomatoes
+                    </input>
+                </label>
+            </fieldset>
+            
+            <!-- Size -->
+            <fieldset>
+                <legend>Pizza Size</legend>
+                <span class="err" id="err-size">
+                    Please select a pizza size
+                </span>
+                <select id="size" name="size">
+                    <option value="none">-- Select a size --</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>  
+            </fieldset>
+
+            <!-- Comment field -->
+            <label for="comment">Comments/Instructions:</label>
+            <textarea rows="5" id="comment" name="comment"></textarea>
+
+            <label for="discount">
+                <input type="checkbox" id="discount" name="discount" checked></input>
+            Sign me up for discounts!</label>
+
+            <!-- Submit button -->
+            <button type="submit" id="order-button">Place Order</button>
+        </form>
+    </main>
+</body>
+</html>
