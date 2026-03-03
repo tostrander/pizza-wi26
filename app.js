@@ -1,5 +1,10 @@
 import express from 'express';
 import mysql2 from 'mysql2';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env
+dotenv.config();
+// console.log(process.env.DB_HOST);
 
 const app = express();
 const PORT = 3000;
@@ -17,11 +22,11 @@ const orders = [];
 
 // Create a pool (bucket) of database connections
 const pool = mysql2.createPool({
-    host: '***',
-    user: '***',
-    password: '***',
-    database: 'pizza_db',
-    port: 3306
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
 }).promise();
 
 // Database test route
