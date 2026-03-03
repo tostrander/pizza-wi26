@@ -17,9 +17,6 @@ app.set('view engine', 'ejs');
 // form data and store it in req.body
 app.use(express.urlencoded({ extended: true }));
 
-// Create a temp array to store orders
-const orders = []; 
-
 // Create a pool (bucket) of database connections
 const pool = mysql2.createPool({
     host: process.env.DB_HOST,
@@ -56,30 +53,44 @@ app.get('/thank-you', (req, res) => {
 });
 
 // Admin route
-app.get('/admin', (req, res) => {
-    res.render('admin', { orders });
+app.get('/admin', async(req, res) => {
+
+    // Read all orders from the database
+    // newest first
+    let sql = "SELECT * FROM orders ORDER BY timestamp DESC";
+    const orders = await pool.query(sql);
+    console.log(orders);
+
+    res.render('admin', { orders: orders[0] });
 });
 
 // Submit order route
 // {"fname":"a","lname":"aa","email":"a",
 // "method":"delivery","toppings":["artichokes"],
 // "size":"small","comment":"","discount":"on"}
-app.post('/submit-order', (req, res) => {
+app.post('/submit-order', async(req, res) => {
     
-    // Create a JSON object to store the order data
-    const order = {
-        fname: req.body.fname,
-        lname: req.body.lname,
-        email: req.body.email,
-        method: req.body.method,
-        toppings: req.body.toppings ? req.body.toppings : "none",
-        size: req.body.size,
-        comment: req.body.comment,
-        timestamp: new Date()
-    };
+    const order = req.body;
 
-    // Add order object to orders array
-    orders.push(order);
+    // Create an array of order data
+    // (fname, lname, email, size, method, toppings)
+    const params = [
+        order.fname,
+        order.lname,
+        order.email,
+        order.size,
+        order.method,
+        Array.isArray(order.toppings) ? order.toppings.join(", ") : "none"
+    ];
+
+    // Insert a new order into the database
+    const sql = `INSERT INTO orders (fname, lname, email, 
+                 size, method, toppings)
+                 VALUES (?, ?, ?, ?, ?, ?)`;
+
+    const result = await pool.execute(sql, params);
+    console.log("Order inserted with ID: ", result[0].insertId);
+
     res.render('confirmation', { order });
 });
 
