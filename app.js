@@ -1,6 +1,8 @@
 import express from 'express';
 import mysql2 from 'mysql2';
 import dotenv from 'dotenv';
+import {validateForm} from './validation.js';
+validateForm();
 
 // Load environment variables from .env
 dotenv.config();
