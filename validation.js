@@ -23,6 +23,26 @@ export function validateForm(data) {
     }
 
     // Validate last name
+    if (data.lname.trim() == "") {
+        errors.push("Last name is required.");
+    }
+
+    // Validate method (pickup or delivery)
+    const validMethods = ['pickup', 'delivery'];
+    if(!validMethods.includes(data.method)) {
+        errors.push("Method must be pickup or delivery");
+    }
+
+    // Validate pizza size
+    const validSizes = ['small', 'medium', 'large'];
+    if(!validSizes.includes(data.size)) {
+        errors.push("Size is not valid. Go away, evildoer!");
+    }
+
 
     console.log(errors);
+    return {
+        isValid: errors.length === 0,
+        errors
+    };
 }

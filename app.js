@@ -73,7 +73,13 @@ app.post('/submit-order', async(req, res) => {
     
     const order = req.body;
 
-    validateForm(order);
+    const valid = validateForm(order);
+    if (!valid.isValid) {
+        console.log(valid);
+        res.render('home', {errors: valid.errors});
+        return;
+    }
+    
 
     // Create an array of order data
     // (fname, lname, email, size, method, toppings)
