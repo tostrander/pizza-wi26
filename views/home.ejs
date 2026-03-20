@@ -26,7 +26,7 @@
         </header>
 
         <!-- Display form errors, if they exist -->
-        <% if (typeof errors != 'undefined') { %>
+        <% if (errors) { %>
             <% errors.forEach(error => { %>
                 <p><%= error %></p>
             <% }); %>

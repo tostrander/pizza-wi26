@@ -40,7 +40,7 @@ app.get('/db-test', async(req, res) => {
 
 // Default route
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', { errors: null });
 });
 
 // Contact route
